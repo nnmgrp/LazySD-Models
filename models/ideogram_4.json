@@ -1,0 +1,60 @@
+{
+  "id": "ideogram_4",
+  "name": "Ideogram 4 (Quantized)",
+  "family": "ideogram",
+  "pipeline": "text_to_image",
+  "key_protected": true,
+  "status": "coming_soon",
+  "available": false,
+  "description": "Text & typography specialist model by QuantFunc (Pending ModelScope Release). Designed for accurate text rendering, signboards, logos, poster designs, and stylized labels.",
+  "upstream": {
+    "model": "ideogram-ai/ideogram-4",
+    "license": "Proprietary",
+    "commercial_use": false
+  },
+  "sources": {
+    "primary": {
+      "type": "modelscope",
+      "repo_id": "QuantFunc/Ideogram-4-Series"
+    },
+    "mirror": {
+      "type": "huggingface",
+      "repo_id": "QuantFunc/Ideogram-4-Series"
+    }
+  },
+  "base_models": {
+    "50x-above": "ideogram-4-series-50x-above-base-model/",
+    "50x-below": "ideogram-4-series-50x-below-base-model/"
+  },
+  "transformers": [],
+  "prequant_weights": [],
+  "precision_configs": [
+    {
+      "id": "fp4-f8-50x",
+      "path": "precision-config/50x-fp4-f8.json",
+      "tier": "50x-above"
+    },
+    {
+      "id": "int4-f8-40x",
+      "path": "precision-config/40x-int4-f8.json",
+      "tier": "50x-below"
+    }
+  ],
+  "requirements": {
+    "vram_min_gb": 10,
+    "vram_recommended_gb": 16,
+    "gpu_min_sm": 75,
+    "gpu_min_tier": "50x-below",
+    "default_vram_mode": "balanced"
+  },
+  "scheduler_presets": {
+    "lighting-4steps": {
+      "steps": 4,
+      "cfg": 1.0,
+      "sampler": "euler",
+      "scheduler": "simple"
+    }
+  },
+  "target_architecture": "ideogram",
+  "engine": "quantfunc"
+}

@@ -1,0 +1,93 @@
+{
+  "id": "qwen_image_2_1_gguf",
+  "name": "Qwen-Image-2.1 (Unsloth GGUF)",
+  "family": "qwen",
+  "pipeline": "text_to_image",
+  "supports_mask": true,
+  "engine": "sd_cpp",
+  "engine_version": "sd_cpp",
+  "description": "Alibaba Qwen-Image-2.1 running via stable-diffusion.cpp with Unsloth GGUF quantizations. Features modular Q4_K_M / Q4_K_S DiT, Qwen3-VL-8B multimodal LLM encoder, and Wan VAE.",
+  "upstream": {
+    "model": "Qwen/Qwen-Image-2.1",
+    "license": "Qwen Research License",
+    "commercial_use": false
+  },
+  "sources": {
+    "primary": {
+      "type": "huggingface",
+      "repo_id": "unsloth/Qwen-Image-2.1-GGUF"
+    }
+  },
+  "engine_args": {
+    "diffusion_model": "qwen-image-2.1-Q4_K_M.gguf",
+    "llm": "Qwen3-VL-8B-Instruct-UD-Q4_K_XL.gguf",
+    "vae": "qwen_image_2.1_vae_bf16.safetensors",
+    "vae_repo": "Comfy-Org/Qwen-Image-2.1",
+    "vae_remote": "vae/qwen_image_2.1_vae_bf16.safetensors"
+  },
+  "text_encoders": [
+    {
+      "id": "ud_q4_k_xl",
+      "name": "Qwen3-VL-8B UD-Q4_K_XL (~4.8 GB, Recommended)",
+      "file": "Qwen3-VL-8B-Instruct-UD-Q4_K_XL.gguf",
+      "precision": "ud_q4_k_xl",
+      "size_gb": 4.79,
+      "size_bytes": 5148699488,
+      "recommended": true,
+      "source": {
+        "repo_id": "unsloth/Qwen3-VL-8B-Instruct-GGUF",
+        "file_path": "Qwen3-VL-8B-Instruct-UD-Q4_K_XL.gguf"
+      }
+    }
+  ],
+  "transformers": [
+    {
+      "id": "q4_k_m",
+      "path": "qwen-image-2.1-Q4_K_M.gguf",
+      "tier": "universal",
+      "backend": "sd_cpp",
+      "steps": 28,
+      "size_gb": 3.91,
+      "size_bytes": 4199565024,
+      "recommended": true,
+      "note": "Unsloth Q4_K_M medium quantization (recommended)"
+    },
+    {
+      "id": "rebelai_q4",
+      "path": "Qwen-Image-2.1-Q4.gguf",
+      "tier": "universal",
+      "backend": "sd_cpp",
+      "steps": 28,
+      "size_gb": 5.55,
+      "size_bytes": 5959104000,
+      "recommended": false,
+      "repo_id": "realrebelai/Qwen-Image-2.1_GGUFs",
+      "note": "RebelAI Q4 GGUF (higher precision, ~5.5 GB)"
+    },
+    {
+      "id": "q4_k_s",
+      "path": "qwen-image-2.1-Q4_K_S.gguf",
+      "tier": "universal",
+      "backend": "sd_cpp",
+      "steps": 28,
+      "size_gb": 3.64,
+      "size_bytes": 3906356960,
+      "recommended": false,
+      "note": "Unsloth Q4_K_S compact quantization"
+    }
+  ],
+  "requirements": {
+    "vram_min_gb": 8,
+    "vram_recommended_gb": 12,
+    "gpu_min_sm": 75,
+    "default_vram_mode": "auto"
+  },
+  "scheduler_presets": {
+    "default": {
+      "sampler": "euler",
+      "steps": 28,
+      "cfg": 3.0
+    }
+  },
+  "target_architecture": "qwen_image_2_1"
+}
