@@ -97,12 +97,8 @@
       }
     }
   ],
-  "tags": [
-    "svdq",
-    "nunchaku",
-    "tonera",
-    "klein",
-    "flux"
+  "prompt_upsamplers": [
+    "flux3-pup-nunchaku"
   ],
-  "target_architecture": "flux_3_image_klein"
+  "tags": ["svdq", "nunchaku", "tonera", "klein", "flux"]
 }
